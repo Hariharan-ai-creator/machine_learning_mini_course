@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ML MADE EASY – Interactive Machine Learning Platform</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+  <!-- Chart.js for Responsive Interactive Visualizations -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+<div class="app-container">
+  <!-- =============================================================== -->
+  <!-- SIDEBAR NAVIGATION -->
+  <!-- =============================================================== -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="brand-logo">
+        <div class="brand-icon">ML</div>
+        <div>
+          <div>ML Made Easy</div>
+          <div class="brand-subtitle">Capstone 15 • CSE</div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section-title">Core Learning</div>
+      <div class="nav-item active" data-target="dashboard">
+        <span class="nav-icon">📊</span>
+        <span>Dashboard</span>
+      </div>
+      <div class="nav-item" data-target="lessons">
+        <span class="nav-icon">📖</span>
+        <span>6 Core Lessons</span>
+      </div>
+      <div class="nav-item" data-target="demos">
+        <span class="nav-icon">⚡</span>
+        <span>Interactive ML Demos</span>
+      </div>
+
+      <div class="nav-section-title">Applied Laboratories</div>
+      <div class="nav-item" data-target="iris">
+        <span class="nav-icon">🌸</span>
+        <span>Iris Classification</span>
+      </div>
+      <div class="nav-item" data-target="housing">
+        <span class="nav-icon">🏡</span>
+        <span>House Price Regression</span>
+      </div>
+      <div class="nav-item" data-target="visual-guide">
+        <span class="nav-icon">🎯</span>
+        <span>Visual Confusion Matrix</span>
+      </div>
+
+      <div class="nav-section-title">Assessment & Ethics</div>
+      <div class="nav-item" data-target="quiz">
+        <span class="nav-icon">📝</span>
+        <span>15-Question Quiz</span>
+      </div>
+      <div class="nav-item" data-target="ai-tools">
+        <span class="nav-icon">🤖</span>
+        <span>AI Tools & Research</span>
+      </div>
+      <div class="nav-item" data-target="ethics">
+        <span class="nav-icon">⚖️</span>
+        <span>Ethics & Responsible AI</span>
+      </div>
+
+      <div class="nav-section-title">Reports & Tracking</div>
+      <div class="nav-item" data-target="progress">
+        <span class="nav-icon">🏆</span>
+        <span>Progress Tracker</span>
+      </div>
+      <div class="nav-item" data-target="reports">
+        <span class="nav-icon">📄</span>
+        <span>Automated Reports</span>
+      </div>
+      <div class="nav-item" data-target="capstone-report">
+        <span class="nav-icon">🎓</span>
+        <span>Capstone Report</span>
+      </div>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div><strong>ML Made Easy v1.0</strong></div>
+      <div>Real Scikit-learn Engine</div>
+      <div>CSE Undergraduate Capstone</div>
+    </div>
+  </aside>
+
+  <!-- =============================================================== -->
+  <!-- MAIN APPLICATION WRAPPER -->
+  <!-- =============================================================== -->
+  <div class="main-wrapper">
+    <!-- Top Header -->
+    <header class="top-header">
+      <div class="header-left">
+        <button id="menu-toggle-btn" class="menu-toggle-btn" aria-label="Toggle Menu">☰</button>
+        <h1 id="current-module-title" class="current-module-title">Dashboard Overview</h1>
+      </div>
+      <div class="header-right">
+        <span id="header-badge-display" class="badge-pill">Rank: ML Novice</span>
+        <button id="theme-toggle-btn" class="theme-toggle-btn" title="Toggle Light / Dark Mode">
+          <span id="theme-toggle-icon">🌙</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Content Body -->
+    <main class="content-area">
+
+      <!-- =========================================================== -->
+      <!-- MODULE 1: DASHBOARD -->
+      <!-- =========================================================== -->
+      <section id="module-dashboard" class="module-section active-module" data-title="Dashboard Overview">
+        <div class="hero-banner">
+          <h2 class="hero-title">Welcome to ML Made Easy</h2>
+          <p class="hero-desc">
+            A comprehensive, hands-on learning environment designed for second- and third-year computer science students.
+            Explore interactive lessons, test real machine learning algorithms, visualize decision boundaries, and evaluate models.
+          </p>
+          <div class="hero-actions">
+            <button class="btn btn-hero-primary" data-quick-nav="lessons">Start Learning Lessons ➡</button>
+            <button class="btn btn-hero-secondary" data-quick-nav="demos">Explore ML Demos ⚡</button>
+            <button class="btn btn-hero-secondary" data-quick-nav="quiz">Take 15-Question Quiz 📝</button>
+          </div>
+        </div>
+
+        <!-- Dashboard Stats Row -->
+        <div class="grid-4">
+          <div class="stat-card">
+            <div class="stat-icon blue">📖</div>
+            <div class="stat-content">
+              <div id="dash-completed-lessons" class="stat-value">0 / 6</div>
+              <div class="stat-label">Completed Lessons</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon green">🎯</div>
+            <div class="stat-content">
+              <div id="dash-quiz-best" class="stat-value">0%</div>
+              <div id="dash-quiz-attempts" class="stat-label">0 attempts</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon amber">🧪</div>
+            <div class="stat-content">
+              <div class="stat-value">5 Active</div>
+              <div class="stat-label">Interactive ML Demos</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon purple">📈</div>
+            <div class="stat-content">
+              <div id="dash-overall-pct" class="stat-value">0%</div>
+              <div class="stat-label">Overall Progress</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Learning Progress Bar -->
+        <div class="card" style="margin-top: 1.5rem;">
+          <div class="card-header">
+            <div class="card-title">Overall Mastery Journey</div>
+            <span class="badge-pill">60% Lessons + 40% Quiz</span>
+          </div>
+          <div class="progress-container">
+            <div id="dash-progress-bar-fill" class="progress-bar-fill" style="width: 0%;"></div>
+          </div>
+          <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">
+            Complete all 6 lessons and achieve over 80% on the quiz to attain the <strong>ML Master</strong> badge.
+          </div>
+        </div>
+
+        <!-- Quick Navigation Grid -->
+        <h3 style="margin: 2rem 0 1rem 0;">Explore Platform Modules</h3>
+        <div class="grid-3">
+          <div class="quick-nav-card" data-quick-nav="lessons">
+            <div class="quick-nav-icon">📚</div>
+            <div class="quick-nav-title">6 Interactive Lessons</div>
+            <div class="quick-nav-desc">Analogies, diagrams, and key takeaways covering core ML foundations.</div>
+          </div>
+          <div class="quick-nav-card" data-quick-nav="demos">
+            <div class="quick-nav-icon">🔬</div>
+            <div class="quick-nav-title">Visual ML Demos</div>
+            <div class="quick-nav-desc">Interactive playgrounds for decision boundaries, K-Means, and overfitting.</div>
+          </div>
+          <div class="quick-nav-card" data-quick-nav="iris">
+            <div class="quick-nav-icon">🌸</div>
+            <div class="quick-nav-title">Iris Flower Classification</div>
+            <div class="quick-nav-desc">Train models (Random Forest, Tree, KNN) and predict live flower species.</div>
+          </div>
+          <div class="quick-nav-card" data-quick-nav="housing">
+            <div class="quick-nav-icon">🏡</div>
+            <div class="quick-nav-title">House Price Regression</div>
+            <div class="quick-nav-desc">Train regression algorithms, analyze R² & MAE, and estimate property values.</div>
+          </div>
+          <div class="quick-nav-card" data-quick-nav="visual-guide">
+            <div class="quick-nav-icon">🎯</div>
+            <div class="quick-nav-title">Confusion Matrix Guide</div>
+            <div class="quick-nav-desc">Interactive TP, FP, TN, FN calculator with precision and recall formulas.</div>
+          </div>
+          <div class="quick-nav-card" data-quick-nav="quiz">
+            <div class="quick-nav-icon">📝</div>
+            <div class="quick-nav-title">15-Question Quiz</div>
+            <div class="quick-nav-desc">Test your knowledge with immediate feedback and pedagogical explanations.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================== -->
+      <!-- MODULE 2: SIX INTERACTIVE ML LESSONS -->
+      <!-- =========================================================== -->
+      <section id="module-lessons" class="module-section" data-title="Module 2: Six Core ML Lessons">
+        <div class="lessons-tabs" id="lessons-tabs-container">
+          <!-- Dynamically populated by lessons.js -->
+        </div>
+        <div id="lesson-detail-container">
+          <!-- Active lesson markup rendered by lessons.js -->
+        </div>
+      </section>
+
+      <!-- =========================================================== -->
+      <!-- MODULE 3: INTERACTIVE ML DEMONSTRATIONS -->
+      <!-- =========================================================== -->
+      <section id="module-demos" class="module-section" data-title="Module 3: Interactive ML Demonstrations">
+        <!-- Demo A: Supervised Decision Boundary -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h2 class="card-title">A. Supervised Learning: Decision Boundary</h2>
+              <p class="card-subtitle">Observe how a model learns to separate labelled flower species in 2D space.</p>
+            </div>
+            <button id="demo-supervised-refresh-btn" class="btn btn-secondary btn-sm">🔄 Refresh Points</button>
+          </div>
+          <div class="chart-container-box">
+            <canvas id="supervised-chart-canvas"></canvas>
+          </div>
+          <div class="callout info" style="margin-top: 1rem;">
+            <p id="supervised-summary-text">Loading supervised boundary demo...</p>
+          </div>
+        </div>
+
+        <!-- Demo B: Unsupervised K-Means -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h2 class="card-title">B. Unsupervised Learning: K-Means Clustering</h2>
+              <p class="card-subtitle">Cluster unlabelled observations based on geometric Euclidean proximity to centroids.</p>
+            </div>
+            <div style="display: flex; gap: 0.75rem; align-items: center;">
+              <label for="kmeans-k-select" style="font-size: 0.85rem; font-weight: 600;">Clusters (k):</label>
+              <select id="kmeans-k-select" class="form-control" style="width: 80px; padding: 0.4rem;">
+                <option value="2">2</option>
+                <option value="3" selected>3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+              <button id="demo-kmeans-run-btn" class="btn btn-primary btn-sm">Run K-Means</button>
+            </div>
+          </div>
+          <div class="chart-container-box">
+            <canvas id="kmeans-chart-canvas"></canvas>
+          </div>
+          <div class="callout info" style="margin-top: 1rem;">
+            <p id="kmeans-summary-text">Loading K-Means clustering demo...</p>
+          </div>
+        </div>
+
+        <!-- Demo C: Overfitting & Bias-Variance -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h2 class="card-title">C. Overfitting & Bias-Variance Tradeoff</h2>
+              <p class="card-subtitle">See how increasing model complexity reduces training error while causing test error to explode.</p>
+            </div>
+            <button id="demo-overfitting-refresh-btn" class="btn btn-secondary btn-sm">🔄 Recalculate Curves</button>
+          </div>
+          <div class="chart-container-box">
+            <canvas id="overfitting-chart-canvas"></canvas>
+          </div>
+          <div class="grid-3" style="margin-top: 1.25rem;">
+            <div class="card" style="margin-bottom: 0; border-left: 4px solid var(--accent-amber);">
+              <h5 style="color: var(--accent-amber);">1. Underfitting Zone</h5>
+              <p id="zone-underfitting" style="font-size: 0.85rem; color: var(--text-muted);">High Bias: Model is too simple.</p>
+            </div>
+            <div class="card" style="margin-bottom: 0; border-left: 4px solid var(--accent-green);">
+              <h5 style="color: var(--accent-green);">2. Sweet Spot (Generalization)</h5>
+              <p id="zone-sweetspot" style="font-size: 0.85rem; color: var(--text-muted);">Optimal tradeoff between bias and variance.</p>
+            </div>
+            <div class="card" style="margin-bottom: 0; border-left: 4px solid var(--accent-red);">
+              <h5 style="color: var(--accent-red);">3. Overfitting Zone</h5>
+              <p id="zone-overfitting" style="font-size: 0.85rem; color: var(--text-muted);">High Variance: Memorizes training noise.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================== -->
+      <!-- MODULE 4: IRIS FLOWER CLASSIFICATION -->
+      <!-- =========================================================== -->
+      <section id="module-iris" class="module-section" data-title="Module 4: Iris Classification Lab">
+        <!-- Dataset Overview -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h2 class="card-title">Iris Flower Botanical Dataset (Fisher, 1936)</h2>
+              <p class="card-subtitle">Canonical multi-class dataset containing 150 specimens across 3 distinct species.</p>
+            </div>
+            <div style="display: flex; gap: 0.5rem;">
+              <button id="iris-view-report-btn" class="btn btn-secondary btn-sm">📋 View Model Report</button>
+              <button id="iris-download-report-btn" class="btn btn-primary btn-sm">📥 Download Report (.TXT)</button>
+            </div>
+          </div>
+
+          <div class="grid-3" style="margin-bottom: 1.25rem;">
+            <div class="stat-card">
+              <div class="stat-icon blue">🌸</div>
+              <div class="stat-content">
+                <div id="iris-total-samples" class="stat-value">150</div>
+                <div class="stat-label">Total Observations</div>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon green">📏</div>
+              <div class="stat-content">
+                <div id="iris-total-features" class="stat-value">4</div>
+                <div class="stat-label">Continuous Features</div>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon purple">🏷️</div>
+              <div class="stat-content">
+                <div class="stat-value">3 Classes</div>
+                <div id="iris-class-counts" class="stat-label" style="font-size: 0.75rem;">Setosa, Versicolor, Virginica</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Feature Statistics Table -->
+          <h4 style="margin: 1rem 0 0.5rem 0;">Feature Statistical Summary</h4>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr><th>Feature</th><th>Mean</th><th>Std Dev</th><th>Min</th><th>Max</th></tr>
+              </thead>
+              <tbody id="iris-stats-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Model Training & Evaluation Panel -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Train Classification Model</div>
+            <span class="badge-pill">Scikit-learn Pipeline</span>
+          </div>
+
+          <div class="form-row" style="margin-bottom: 1.25rem; align-items: flex-end;">
+            <div class="form-group" style="flex: 2; margin-bottom: 0;">
+              <label class="form-label" for="iris-algorithm-select">Choose ML Algorithm:</label>
+              <select id="iris-algorithm-select" class="form-control">
+                <option value="Random Forest" selected>Random Forest Classifier (Ensemble)</option>
+                <option value="Decision Tree">Decision Tree Classifier</option>
+                <option value="Logistic Regression">Logistic Regression (One-vs-Rest)</option>
+                <option value="K-Nearest Neighbors">K-Nearest Neighbors (k=5)</option>
+              </select>
+            </div>
+            <div class="form-group" style="flex: 2; margin-bottom: 0;">
+              <label class="form-label">
+                Train / Test Split Ratio: <span id="iris-test-split-val" style="color: var(--primary-blue); font-weight: 700;">20% Test / 80% Train</span>
+              </label>
+              <input type="range" id="iris-test-split-slider" class="form-control slider-control" min="0.1" max="0.5" step="0.05" value="0.2">
+            </div>
+            <div style="flex: 1;">
+              <button id="iris-train-btn" class="btn btn-primary" style="width: 100%;">🚀 Train Model</button>
+            </div>
+          </div>
+
+          <!-- Metrics Row -->
+          <div class="metrics-row">
+            <div class="metric-badge-box">
+              <div id="iris-metric-accuracy" class="metric-badge-val">--%</div>
+              <div class="metric-badge-title">Accuracy Score</div>
+            </div>
+            <div class="metric-badge-box">
+              <div id="iris-metric-precision" class="metric-badge-val">--</div>
+              <div class="metric-badge-title">Macro Precision</div>
+            </div>
+            <div class="metric-badge-box">
+              <div id="iris-metric-recall" class="metric-badge-val">--</div>
+              <div class="metric-badge-title">Macro Recall</div>
+            </div>
+            <div class="metric-badge-box">
+              <div id="iris-metric-f1" class="metric-badge-val">--</div>
+              <div class="metric-badge-title">Macro F1-Score</div>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div>
+              <h4>3x3 Confusion Matrix Heatmap</h4>
+              <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.5rem;">
+                Diagonal cells represent correctly classified flowers. Off-diagonals are classification errors.
+              </p>
+              <div id="iris-confusion-matrix-box"></div>
+            </div>
+            <div>
+              <h4>Feature Importance</h4>
+              <div style="height: 220px; position: relative;">
+                <canvas id="iris-importance-chart"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Live Flower Predictor -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Live Botanical Species Predictor</div>
+            <span class="badge-pill">Real Model Inference</span>
+          </div>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
+            Enter flower dimensions or load a botanical preset to see the trained Scikit-learn model predict the species with probability distributions.
+          </p>
+
+          <div style="display: flex; gap: 0.5rem; margin-bottom: 1.25rem;">
+            <button class="btn btn-secondary btn-sm" data-iris-preset="setosa">Load Sample Setosa</button>
+            <button class="btn btn-secondary btn-sm" data-iris-preset="versicolor">Load Sample Versicolor</button>
+            <button class="btn btn-secondary btn-sm" data-iris-preset="virginica">Load Sample Virginica</button>
+          </div>
+
+          <div class="grid-4">
+            <div class="form-group">
+              <label class="form-label" for="iris-input-sl">Sepal Length (cm):</label>
+              <input type="number" id="iris-input-sl" class="form-control" step="0.1" value="5.1">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="iris-input-sw">Sepal Width (cm):</label>
+              <input type="number" id="iris-input-sw" class="form-control" step="0.1" value="3.5">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="iris-input-pl">Petal Length (cm):</label>
+              <input type="number" id="iris-input-pl" class="form-control" step="0.1" value="1.4">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="iris-input-pw">Petal Width (cm):</label>
+              <input type="number" id="iris-input-pw" class="form-control" step="0.1" value="0.2">
+            </div>
+          </div>
+
+          <button id="iris-predict-btn" class="btn btn-primary" style="margin-top: 0.5rem;">🔮 Predict Species</button>
+
+          <!-- Prediction Result Card -->
+          <div id="iris-prediction-result" class="prediction-result-card" style="display: none;">
+            <div style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted);">Predicted Classification:</div>
+            <div id="iris-pred-species-title" class="prediction-title">Iris Setosa</div>
+            <p id="iris-pred-description" style="font-size: 0.9rem; margin: 0.75rem 0; color: var(--text-secondary);"></p>
+            <div id="iris-pred-algorithm-note" style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 1rem;"></div>
+
+            <div style="height: 140px; max-width: 500px; margin: 0 auto; position: relative;">
+              <canvas id="iris-probability-chart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sample Records Table -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Dataset Raw Sample Records (First 10 Rows)</div>
+          </div>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr><th>Sample #</th><th>Sepal L</th><th>Sepal W</th><th>Petal L</th><th>Petal W</th><th>Species Target</th></tr>
+              </thead>
+              <tbody id="iris-samples-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================== -->
+      <!-- MODULE 5: HOUSE PRICE PREDICTION -->
+      <!-- =========================================================== -->
+      <section id="module-housing" class="module-section" data-title="Module 5: House Price Regression Lab">
+        <!-- Overview -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h2 class="card-title">Residential Real Estate Valuation Dataset</h2>
+              <p class="card-subtitle">Continuous housing dataset with demographic and physical property features.</p>
+            </div>
+            <div style="display: flex; gap: 0.5rem;">
+              <button id="housing-view-report-btn" class="btn btn-secondary btn-sm">📋 View Model Report</button>
+              <button id="housing-download-report-btn" class="btn btn-primary btn-sm">📥 Download Report (.TXT)</button>
+            </div>
+          </div>
+
+          <div class="grid-2" style="margin-bottom: 1.25rem;">
+            <div class="stat-card">
+              <div class="stat-icon blue">🏘️</div>
+              <div class="stat-content">
+                <div id="housing-total-samples" class="stat-value">500</div>
+                <div class="stat-label">Housing Records</div>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon green">📐</div>
+              <div class="stat-content">
+                <div id="housing-total-features" class="stat-value">5</div>
+                <div class="stat-label">Independent Predictors</div>
+              </div>
+            </div>
+          </div>
+
+          <h4 style="margin: 1rem 0 0.5rem 0;">Feature Attributes & Summary Statistics</h4>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr><th>Feature</th><th>Mean</th><th>Std Dev</th><th>Min</th><th>Max</th></tr>
+              </thead>
+              <tbody id="housing-stats-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Model Training Panel -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Train Regression Model</div>
+            <span class="badge-pill">Scikit-learn Regressors</span>
+          </div>
+
+          <div class="form-row" style="margin-bottom: 1.25rem; align-items: flex-end;">
+            <div class="form-group" style="flex: 2; margin-bottom: 0;">
+              <label class="form-label" for="housing-algorithm-select">Choose Regression Algorithm:</label>
+              <select id="housing-algorithm-select" class="form-control">
+                <option value="Random Forest Regressor" selected>Random Forest Regressor (Ensemble)</option>
+                <option value="Linear Regression">Ordinary Least Squares Linear Regression</option>
+                <option value="Ridge Regression">Ridge Regression (L2 Regularized)</option>
+              </select>
+            </div>
+            <div class="form-group" style="flex: 2; margin-bottom: 0;">
+              <label class="form-label">
+                Train / Test Split Ratio: <span id="housing-test-split-val" style="color: var(--primary-blue); font-weight: 700;">20% Test / 80% Train</span>
+              </label>
+              <input type="range" id="housing-test-split-slider" class="form-control slider-control" min="0.1" max="0.5" step="0.05" value="0.2">
+            </div>
+            <div style="flex: 1;">
+              <button id="housing-train-btn" class="btn btn-primary" style="width: 100%;">🚀 Train Regressor</button>
+            </div>
+          </div>
+
+          <!-- Regression Metrics -->
+          <div class="metrics-row">
+            <div class="metric-badge-box">
+              <div id="housing-metric-r2" class="metric-badge-val">--%</div>
+              <div class="metric-badge-title">R² Score (Variance Explained)</div>
+            </div>
+            <div class="metric-badge-box">
+              <div id="housing-metric-mae" class="metric-badge-val">$--</div>
+              <div class="metric-badge-title">Mean Absolute Error (MAE)</div>
+            </div>
+            <div class="metric-badge-box">
+              <div id="housing-metric-rmse" class="metric-badge-val">$--</div>
+              <div class="metric-badge-title">Root Mean Squared Error (RMSE)</div>
+            </div>
+            <div class="metric-badge-box">
+              <div id="housing-metric-mse" class="metric-badge-val">--</div>
+              <div class="metric-badge-title">Mean Squared Error (MSE)</div>
+            </div>
+          </div>
+
+          <!-- Actual vs Predicted Scatter Chart -->
+          <h4>Actual vs Predicted House Prices (Test Set)</h4>
+          <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.75rem;">
+            Points closer to the green 45° diagonal line indicate higher model accuracy.
+          </p>
+          <div class="chart-container-box">
+            <canvas id="housing-actual-pred-chart"></canvas>
+          </div>
+        </div>
+
+        <!-- Live Valuation Predictor -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Live Property Price Estimator</div>
+            <span class="badge-pill">Real Model Inference</span>
+          </div>
+
+          <div style="display: flex; gap: 0.5rem; margin-bottom: 1.25rem;">
+            <button class="btn btn-secondary btn-sm" data-housing-preset="budget">Load Budget Home</button>
+            <button class="btn btn-secondary btn-sm" data-housing-preset="average">Load Suburban Family Home</button>
+            <button class="btn btn-secondary btn-sm" data-housing-preset="luxury">Load Metro Luxury Home</button>
+          </div>
+
+          <div class="grid-3">
+            <div class="form-group">
+              <label class="form-label" for="housing-input-income">Avg Area Income ($):</label>
+              <input type="number" id="housing-input-income" class="form-control" step="1000" value="65000">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="housing-input-age">House Age (Years):</label>
+              <input type="number" id="housing-input-age" class="form-control" step="1" value="10">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="housing-input-rooms">Avg Rooms:</label>
+              <input type="number" id="housing-input-rooms" class="form-control" step="0.5" value="6.0">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="housing-input-bedrooms">Avg Bedrooms:</label>
+              <input type="number" id="housing-input-bedrooms" class="form-control" step="0.5" value="3.0">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="housing-input-population">Area Population:</label>
+              <input type="number" id="housing-input-population" class="form-control" step="500" value="30000">
+            </div>
+          </div>
+
+          <button id="housing-predict-btn" class="btn btn-primary" style="margin-top: 0.5rem;">💰 Predict House Price</button>
+
+          <!-- Valuation Output -->
+          <div id="housing-prediction-result" class="prediction-result-card" style="display: none;">
+            <div style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted);">Estimated Property Value:</div>
+            <div id="housing-pred-price-title" class="prediction-title">$342,000.00</div>
+            <div id="housing-pred-range" style="font-size: 0.95rem; font-weight: 600; color: var(--accent-cyan); margin: 0.4rem 0;"></div>
+            <div id="housing-pred-algorithm-note" style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.75rem;"></div>
+
+            <div class="callout warning" style="text-align: left; margin: 1rem 0 0 0;">
+              <span id="housing-pred-disclaimer"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sample Records Table -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Dataset Raw Sample Records (First 10 Rows)</div>
+          </div>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr><th>Sample #</th><th>Avg Income</th><th>House Age</th><th>Rooms</th><th>Bedrooms</th><th>Population</th><th>Actual Price</th></tr>
+              </thead>
+              <tbody id="housing-samples-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================== -->
+      <!-- MODULE 6: VISUAL ML GUIDE -->
+      <!-- =========================================================== -->
+      <section id="module-visual-guide" class="module-section" data-title="Module 6: Visual Confusion Matrix Guide">
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h2 class="card-title">Interactive Confusion Matrix Sandbox</h2>
+              <p class="card-subtitle">Adjust counts to immediately see how Precision, Recall, Accuracy, and F1-Score recalculate.</p>
+            </div>
+            <div style="display: flex; gap: 0.5rem;">
+              <button class="btn btn-secondary btn-sm" data-cm-scenario="cancer">Medical Screening Preset</button>
+              <button class="btn btn-secondary btn-sm" data-cm-scenario="spam">Spam Filter Preset</button>
+              <button class="btn btn-secondary btn-sm" data-cm-scenario="imbalanced">Imbalanced Dataset Preset</button>
+            </div>
+          </div>
+
+          <div id="calc-context-alert" class="callout success">
+            Adjust the sliders below to explore performance dynamics.
+          </div>
+
+          <!-- 2x2 Interactive Matrix Sliders -->
+          <div class="matrix-interactive-sandbox">
+            <div class="sandbox-cell tp">
+              <div style="display: flex; justify-content: space-between; font-weight: 700;">
+                <span>True Positive (TP)</span>
+                <span id="calc-val-tp" style="font-size: 1.25rem; color: var(--accent-green);">80</span>
+              </div>
+              <p style="font-size: 0.8rem; color: var(--text-secondary);">Correctly detected actual positive cases.</p>
+              <div class="slider-group">
+                <input type="range" id="calc-slider-tp" class="slider-control" min="0" max="200" value="80">
+              </div>
+            </div>
+
+            <div class="sandbox-cell fp">
+              <div style="display: flex; justify-content: space-between; font-weight: 700;">
+                <span>False Positive (FP - Type I)</span>
+                <span id="calc-val-fp" style="font-size: 1.25rem; color: var(--accent-amber);">15</span>
+              </div>
+              <p style="font-size: 0.8rem; color: var(--text-secondary);">False alarm: Predicted positive, reality was negative.</p>
+              <div class="slider-group">
+                <input type="range" id="calc-slider-fp" class="slider-control" min="0" max="200" value="15">
+              </div>
+            </div>
+
+            <div class="sandbox-cell fn">
+              <div style="display: flex; justify-content: space-between; font-weight: 700;">
+                <span>False Negative (FN - Type II)</span>
+                <span id="calc-val-fn" style="font-size: 1.25rem; color: var(--accent-red);">10</span>
+              </div>
+              <p style="font-size: 0.8rem; color: var(--text-secondary);">Missed detection: Reality was positive, model said negative.</p>
+              <div class="slider-group">
+                <input type="range" id="calc-slider-fn" class="slider-control" min="0" max="200" value="10">
+              </div>
+            </div>
+
+            <div class="sandbox-cell tn">
+              <div style="display: flex; justify-content: space-between; font-weight: 700;">
+                <span>True Negative (TN)</span>
+                <span id="calc-val-tn" style="font-size: 1.25rem; color: var(--primary-blue);">85</span>
+              </div>
+              <p style="font-size: 0.8rem; color: var(--text-secondary);">Correctly identified actual negative cases.</p>
+              <div class="slider-group">
+                <input type="range" id="calc-slider-tn" class="slider-control" min="0" max="200" value="85">
+              </div>
+            </div>
+          </div>
+
+          <!-- Dynamic Metrics Display -->
+          <h4 style="margin: 1.5rem 0 1rem 0;">Live Recalculated Metrics</h4>
+          <div class="grid-4">
+            <div class="card" style="margin-bottom: 0;">
+              <h5>Accuracy</h5>
+              <div id="calc-res-accuracy" class="metric-badge-val" style="margin: 0.5rem 0;">86.8%</div>
+              <div class="progress-container"><div id="calc-bar-accuracy" class="progress-bar-fill" style="width: 86.8%;"></div></div>
+              <small id="calc-formula-accuracy" style="color: var(--text-muted); font-family: monospace;">(TP+TN)/Total</small>
+            </div>
+            <div class="card" style="margin-bottom: 0;">
+              <h5>Precision</h5>
+              <div id="calc-res-precision" class="metric-badge-val" style="margin: 0.5rem 0; color: var(--accent-green);">84.2%</div>
+              <div class="progress-container"><div id="calc-bar-precision" class="progress-bar-fill" style="width: 84.2%; background: var(--accent-green);"></div></div>
+              <small id="calc-formula-precision" style="color: var(--text-muted); font-family: monospace;">TP/(TP+FP)</small>
+            </div>
+            <div class="card" style="margin-bottom: 0;">
+              <h5>Recall (Sensitivity)</h5>
+              <div id="calc-res-recall" class="metric-badge-val" style="margin: 0.5rem 0; color: var(--accent-cyan);">88.9%</div>
+              <div class="progress-container"><div id="calc-bar-recall" class="progress-bar-fill" style="width: 88.9%; background: var(--accent-cyan);"></div></div>
+              <small id="calc-formula-recall" style="color: var(--text-muted); font-family: monospace;">TP/(TP+FN)</small>
+            </div>
+            <div class="card" style="margin-bottom: 0;">
+              <h5>F1-Score</h5>
+              <div id="calc-res-f1" class="metric-badge-val" style="margin: 0.5rem 0; color: var(--accent-purple);">86.5%</div>
+              <div class="progress-container"><div id="calc-bar-f1" class="progress-bar-fill" style="width: 86.5%; background: var(--accent-purple);"></div></div>
+              <small id="calc-formula-f1" style="color: var(--text-muted); font-family: monospace;">2*(P*R)/(P+R)</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Educational Reference Cards -->
+        <div class="grid-2">
+          <div class="card">
+            <h4>🚨 False Positives vs False Negatives</h4>
+            <div style="margin: 1rem 0;">
+              <strong>When False Positives are Fatal:</strong>
+              <p style="font-size: 0.85rem; color: var(--text-secondary);">
+                In judicial sentencing AI or critical email spam filters, a False Positive falsely accuses an innocent citizen or sends a life-critical job contract to the junk folder.
+              </p>
+            </div>
+            <div>
+              <strong>When False Negatives are Fatal:</strong>
+              <p style="font-size: 0.85rem; color: var(--text-secondary);">
+                In malignant tumor diagnosis or airport explosives screening, a False Negative tells a sick cancer patient they are healthy, delaying life-saving treatment.
+              </p>
+            </div>
+          </div>
+
+          <div class="card">
+            <h4>💡 The Precision-Recall Tradeoff</h4>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6;">
+              In real-world applications, you rarely get 100% Precision and 100% Recall simultaneously. Lowering the decision threshold makes the model more sensitive (boosting Recall, but increasing false alarms and reducing Precision). Raising the threshold requires more certainty (boosting Precision, but missing edge cases and reducing Recall).
+            </p>
+            <div class="callout info" style="margin-top: 1rem;">
+              <strong>Rule of Thumb:</strong> If cost of missing a positive is high ➔ Maximize Recall. If cost of false alarms is high ➔ Maximize Precision.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================== -->
+      <!-- MODULE 7: QUIZ SYSTEM -->
+      <!-- =========================================================== -->
+      <section id="module-quiz" class="module-section" data-title="Module 7: 15-Question ML Mastery Quiz">
+        <!-- Active Quiz Container -->
+        <div id="quiz-active-container" class="card">
+          <div class="card-header">
+            <div>
+              <span id="quiz-question-number" class="badge-pill">Question 1 of 15</span>
+              <h2 id="quiz-question-text" class="quiz-question-title" style="margin-top: 0.5rem;">Loading question...</h2>
+            </div>
+            <button id="quiz-submit-btn" class="btn btn-success btn-sm">✔ Submit Quiz</button>
+          </div>
+
+          <!-- Question Grid Numbers -->
+          <div id="quiz-indicator-grid" class="quiz-indicator-grid"></div>
+
+          <!-- Options -->
+          <div id="quiz-options-container" class="quiz-options-list"></div>
+
+          <div class="quiz-actions">
+            <button id="quiz-prev-btn" class="btn btn-secondary">⬅ Previous</button>
+            <button id="quiz-next-btn" class="btn btn-primary">Next ➡</button>
+          </div>
+        </div>
+
+        <!-- Quiz Results & Detailed Review Container -->
+        <div id="quiz-results-container" class="card" style="display: none;">
+          <div class="card-header">
+            <div>
+              <h2 class="card-title">Quiz Performance Results</h2>
+              <p class="card-subtitle">Your score has been recorded to the SQLite database.</p>
+            </div>
+            <button id="quiz-retake-btn" class="btn btn-secondary">🔄 Retake Quiz</button>
+          </div>
+
+          <div class="grid-4" style="margin: 1.5rem 0;">
+            <div class="stat-card">
+              <div class="stat-icon blue">🎯</div>
+              <div class="stat-content">
+                <div id="quiz-score-display" class="stat-value">-- / 15</div>
+                <div class="stat-label">Raw Score</div>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon green">📊</div>
+              <div class="stat-content">
+                <div id="quiz-percentage-display" class="stat-value">--%</div>
+                <div class="stat-label">Percentage</div>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon purple">🏆</div>
+              <div class="stat-content">
+                <div id="quiz-grade-display" class="stat-value">--</div>
+                <div class="stat-label">Assigned Grade</div>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon amber">💡</div>
+              <div class="stat-content">
+                <div id="quiz-feedback-display" class="stat-label" style="font-weight: 600; color: var(--text-primary);">Feedback</div>
+              </div>
+            </div>
+          </div>
+
+          <h3 style="margin: 2rem 0 1rem 0;">Comprehensive Answer Breakdown & Pedagogical Review</h3>
+          <div id="quiz-review-list"></div>
+        </div>
+      </section>
+
+      <!-- =========================================================== -->
+      <!-- MODULE 8: MODEL REPORT AUTOMATION -->
+      <!-- =========================================================== -->
+      <section id="module-reports" class="module-section" data-title="Module 8: Model Evaluation Reports">
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h2 class="card-title">Automated Model Evaluation Reports</h2>
+              <p class="card-subtitle">Generate, inspect, and download structured academic evaluation documents for trained models.</p>
+            </div>
+          </div>
+          <p style="font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 1.5rem;">
+            Every time a model is trained in the Iris Classification or House Price Regression lab, our Python backend automatically computes an in-depth evaluation report detailing the split ratio, algorithm hyperparameters, confusion matrix, and limitation analysis.
+          </p>
+
+          <div class="grid-2">
+            <div class="card" style="margin-bottom: 0;">
+              <h4>🌸 Iris Classification Model Report</h4>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0.5rem 0 1rem 0;">
+                Includes Multi-Class Accuracy, Macro Precision/Recall/F1, per-class breakdown, and 3x3 confusion matrix text representation.
+              </p>
+              <div style="display: flex; gap: 0.5rem;">
+                <button class="btn btn-secondary btn-sm" onclick="App.openReportModal('Iris Classification Report', '', '/api/report/download/iris'); fetch('/api/report/view/iris').then(r=>r.json()).then(d=>document.getElementById('report-modal-body').textContent=d.report);">View Report</button>
+                <a href="/api/report/download/iris" class="btn btn-primary btn-sm">📥 Download .TXT</a>
+              </div>
+            </div>
+
+            <div class="card" style="margin-bottom: 0;">
+              <h4>🏡 House Price Regression Report</h4>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0.5rem 0 1rem 0;">
+                Includes R² coefficient of determination, Mean Absolute Error (MAE), Mean Squared Error (MSE), and relative feature weights.
+              </p>
+              <div style="display: flex; gap: 0.5rem;">
+                <button class="btn btn-secondary btn-sm" onclick="App.openReportModal('Housing Regression Report', '', '/api/report/download/housing'); fetch('/api/report/view/housing').then(r=>r.json()).then(d=>document.getElementById('report-modal-body').textContent=d.report);">View Report</button>
+                <a href="/api/report/download/housing" class="btn btn-primary btn-sm">📥 Download .TXT</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================== -->
+      <!-- MODULE 9: AI TOOLS AND RESEARCH -->
+      <!-- =========================================================== -->
+      <section id="module-ai-tools" class="module-section" data-title="Module 9: AI Tools & Research Hub">
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h2 class="card-title">Modern AI Research & Learning Assistants</h2>
+              <p class="card-subtitle">How modern foundational LLMs support machine learning engineering and academic research.</p>
+            </div>
+          </div>
+
+          <div class="callout info">
+            <strong>Educational Transparency Note:</strong> These tools are listed as conceptual learning, literature review, and coding assistants. They are not simulated or deceptively wrapped inside this application.
+          </div>
+
+          <div class="grid-2" style="margin: 1.5rem 0;">
+            <div class="card" style="margin-bottom: 0;">
+              <h3>ChatGPT (OpenAI)</h3>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.75rem;">Conversational reasoning & code drafting.</p>
+              <ul style="font-size: 0.85rem; color: var(--text-secondary); padding-left: 1.25rem;">
+                <li><strong>Learning:</strong> Explaining mathematical concepts (e.g. gradient descent, eigenvalues) using custom analogies.</li>
+                <li><strong>Coding:</strong> Generating baseline Scikit-learn boilerplate pipelines and regex data cleanups.</li>
+                <li><strong>Debugging:</strong> Interpreting shape mismatch errors (`ValueError: Expected 2D array, got 1D array instead`).</li>
+              </ul>
+            </div>
+
+            <div class="card" style="margin-bottom: 0;">
+              <h3>Google Gemini</h3>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.75rem;">Multimodal synthesis & technical problem-solving.</p>
+              <ul style="font-size: 0.85rem; color: var(--text-secondary); padding-left: 1.25rem;">
+                <li><strong>Learning:</strong> Deep integration with Google Developer documentation and TensorFlow/JAX ecosystems.</li>
+                <li><strong>Research:</strong> Synthesizing recent arXiv machine learning preprints and cross-referencing benchmarks.</li>
+                <li><strong>Verification:</strong> Sanity-checking mathematical formulas and algorithm complexity.</li>
+              </ul>
+            </div>
+
+            <div class="card" style="margin-bottom: 0;">
+              <h3>Anthropic Claude</h3>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.75rem;">Long-context code review & analytical reasoning.</p>
+              <ul style="font-size: 0.85rem; color: var(--text-secondary); padding-left: 1.25rem;">
+                <li><strong>Learning:</strong> Step-by-step code walkthroughs with high attention to architectural nuances.</li>
+                <li><strong>Coding:</strong> Auditing complex feature engineering functions and preventing data leakage.</li>
+                <li><strong>Verification:</strong> Identifying subtle edge cases in train/validation/test data splits.</li>
+              </ul>
+            </div>
+
+            <div class="card" style="margin-bottom: 0;">
+              <h3>Google NotebookLM</h3>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.75rem;">Grounded source citation & synthesis.</p>
+              <ul style="font-size: 0.85rem; color: var(--text-secondary); padding-left: 1.25rem;">
+                <li><strong>Learning:</strong> Grounding AI responses strictly in uploaded university lecture notes and course syllabi.</li>
+                <li><strong>Research:</strong> Generating comprehensive audio overviews and cross-document comparison tables.</li>
+                <li><strong>Verification:</strong> Minimizes hallucinations through strict source citations.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Research References Section -->
+          <h3 style="margin: 2rem 0 1rem 0;">Curated Research References & Documentation</h3>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr><th>Resource Name</th><th>Category</th><th>Description</th><th>Link</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Scikit-learn Documentation</strong></td>
+                  <td>Official Framework</td>
+                  <td>Comprehensive API reference, tutorials, and algorithm guides.</td>
+                  <td><a href="https://scikit-learn.org/stable/" target="_blank" rel="noopener">scikit-learn.org ↗</a></td>
+                </tr>
+                <tr>
+                  <td><strong>Google Machine Learning Crash Course</strong></td>
+                  <td>Interactive Curriculum</td>
+                  <td>Video modules, interactive exercises, and best practices from Google engineers.</td>
+                  <td><a href="https://developers.google.com/machine-learning/crash-course" target="_blank" rel="noopener">Google ML Course ↗</a></td>
+                </tr>
+                <tr>
+                  <td><strong>Breiman (2001) - Random Forests</strong></td>
+                  <td>Foundational Paper</td>
+                  <td>Seminal academic publication introducing bagged ensemble decision trees.</td>
+                  <td><a href="https://link.springer.com/article/10.1023/A:1010933404324" target="_blank" rel="noopener">Springer Article ↗</a></td>
+                </tr>
+                <tr>
+                  <td><strong>Pedregosa et al. (2011) - Scikit-learn JMLR</strong></td>
+                  <td>Academic Paper</td>
+                  <td>Journal of Machine Learning Research publication detailing Scikit-learn's architecture.</td>
+                  <td><a href="https://jmlr.org/papers/v12/pedregosa11a.html" target="_blank" rel="noopener">JMLR Paper ↗</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================== -->
+      <!-- MODULE 10: ETHICS AND RESPONSIBLE AI -->
+      <!-- =========================================================== -->
+      <section id="module-ethics" class="module-section" data-title="Module 10: Ethics & Responsible AI">
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h2 class="card-title">Ethics, Fairness, and Responsible AI</h2>
+              <p class="card-subtitle">Why mathematical accuracy is never the only metric that matters.</p>
+            </div>
+          </div>
+
+          <div class="grid-3" style="margin-bottom: 1.5rem;">
+            <div class="card" style="margin-bottom: 0;">
+              <h4>🔒 Dataset Privacy</h4>
+              <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem;">
+                Models can inadvertently memorize training rows. Compliance with privacy standards (GDPR, HIPAA), anonymization, and differential privacy prevent sensitive data leakage.
+              </p>
+            </div>
+            <div class="card" style="margin-bottom: 0;">
+              <h4>⚖️ Training Data Bias</h4>
+              <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem;">
+                Algorithms learn from historical patterns. If historical loan approvals or hiring practices discriminated against minority groups, models will optimize to automate that discrimination.
+              </p>
+            </div>
+            <div class="card" style="margin-bottom: 0;">
+              <h4>🔍 Transparency & Auditing</h4>
+              <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem;">
+                Black-box algorithms are unacceptable in criminal sentencing, medical treatments, and lending. Explainable AI (SHAP, LIME) is mandatory for stakeholder accountability.
+              </p>
+            </div>
+          </div>
+
+          <div class="analogy-box">
+            <div class="analogy-header">⚠️ Case Study: The Danger of "Accuracy Alone"</div>
+            <p>
+              Consider a medical dataset of 1,000 patients where only 5 individuals have a rare life-threatening condition (99.5% healthy, 0.5% disease).<br><br>
+              A useless "dummy" model that outputs <code>"Patient Healthy"</code> for every single case will achieve an astonishing <strong>99.5% Accuracy</strong>. Yet its clinical utility is exactly zero, and all 5 diseased patients are left to suffer without treatment.
+              <br><br>
+              <strong>Lesson:</strong> On imbalanced distributions, accuracy is dangerously deceptive. Precision, Recall, and the Confusion Matrix are indispensable safeguards.
+            </p>
+          </div>
+
+          <h4>Core Checklist for Responsible ML Engineers:</h4>
+          <ul class="takeaway-list">
+            <li>Did you audit the dataset for demographic and geographic representation?</li>
+            <li>Did you evaluate your model across sub-populations rather than just reporting one global average?</li>
+            <li>Have you verified that the model does not suffer from data leakage between train and test sets?</li>
+            <li>Are users clearly warned about model limitations and intended operational boundaries?</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- =========================================================== -->
+      <!-- MODULE 11: PROGRESS TRACKER -->
+      <!-- =========================================================== -->
+      <section id="module-progress" class="module-section" data-title="Module 11: Learner Progress Tracker">
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h2 class="card-title">Learner Progress & Milestone Tracker</h2>
+              <p class="card-subtitle">All metrics are stored persistently in the SQLite database.</p>
+            </div>
+            <button id="tracker-reset-progress-btn" class="btn btn-danger btn-sm">🔄 Reset All Progress</button>
+          </div>
+
+          <div class="grid-2" style="margin-bottom: 1.5rem;">
+            <div class="card" style="margin-bottom: 0;">
+              <h4>Lesson Completion Status</h4>
+              <p id="tracker-lessons-count" style="font-size: 0.85rem; color: var(--text-muted); margin: 0.25rem 0 0.5rem 0;">0 of 6 completed</p>
+              <div class="progress-container"><div id="tracker-lessons-bar" class="progress-bar-fill" style="width: 0%;"></div></div>
+              <div id="tracker-lessons-list" style="margin-top: 1rem;"></div>
+            </div>
+
+            <div class="card" style="margin-bottom: 0;">
+              <h4>Current Achievement Badge</h4>
+              <div style="text-align: center; padding: 1.5rem 0;">
+                <div style="font-size: 3.5rem;">🏅</div>
+                <h3 id="tracker-badge-title" style="color: var(--primary-blue); margin-top: 0.5rem;">ML Novice</h3>
+                <p style="font-size: 0.85rem; color: var(--text-muted); max-width: 300px; margin: 0.5rem auto 0 auto;">
+                  Progress through all 6 core lessons and score over 80% on the quiz to unlock the <strong>ML Master</strong> ranking!
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quiz Attempt History -->
+          <h4>Historical Quiz Attempts (Stored in SQLite)</h4>
+          <div class="table-responsive" style="margin-top: 0.75rem;">
+            <table class="table">
+              <thead>
+                <tr><th>Attempt #</th><th>Score</th><th>Grade</th><th>Feedback Summary</th><th>Timestamp</th></tr>
+              </thead>
+              <tbody id="tracker-quiz-history-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================== -->
+      <!-- MODULE 12: FINAL PROJECT CAPSTONE REPORT -->
+      <!-- =========================================================== -->
+      <section id="module-capstone-report" class="module-section" data-title="Module 12: Capstone Project Report">
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h2 class="card-title">Capstone 15 Formal Project Documentation</h2>
+              <p class="card-subtitle">Comprehensive academic report prepared for graduation submission & evaluation committee.</p>
+            </div>
+            <a href="/api/capstone-report/download" class="btn btn-primary btn-sm">📥 Download Project Report (.MD)</a>
+          </div>
+
+          <div style="background-color: var(--bg-card-subtle); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 2rem; font-family: monospace; font-size: 0.85rem; line-height: 1.7; max-height: 600px; overflow-y: auto; white-space: pre-wrap;">
+# CAPSTONE PROJECT REPORT
+PROJECT TITLE: ML MADE EASY – Interactive Machine Learning Learning Platform
+Academic Year: 2025–2026 | Department: Computer Science & Engineering (CSE) | Capstone 15
+
+1. ABSTRACT
+Machine Learning (ML) has emerged as an indispensable cornerstone of undergraduate computer science curricula. However, second- and third-year students frequently encounter steep learning curves when transitioning from abstract mathematical formulas to practical code. ML MADE EASY bridges this pedagogical gap by providing an end-to-end, interactive web-based educational platform. Developed using Python Flask, Scikit-learn, Pandas, NumPy, HTML5, CSS3, and Chart.js, the system delivers twelve cohesive modules including real-time decision boundaries, K-Means clustering playgrounds, interactive confusion matrices, automated report generation, and SQLite progress tracking.
+
+2. SYSTEM ARCHITECTURE (MVC)
+- Frontend: HTML5 / Modern CSS / Vanilla ES6 JavaScript / Chart.js 4.4
+- Backend: Python Flask 3.1 REST API Server (app.py)
+- ML Engine: Scikit-learn 1.9 (RandomForest, LogisticRegression, KMeans, Ridge)
+- Database: Embedded SQLite3 (database.db)
+- Datasets: Fisher's 150-sample Iris CSV & 500-sample Housing CSV
+
+3. EXPERIMENTAL PERFORMANCE BENCHMARKS
+- Iris Flower Classification (Random Forest 80/20 split): 96.67% Accuracy | 0.967 Macro F1-Score
+- House Price Regression (Random Forest Regressor 80/20 split): R² = 0.771 | MAE = $14,210
+- Execution Latency: Under 120ms on standard workstation CPU without GPU requirements.
+
+(Use the "Download Project Report" button above to obtain the full academic markdown paper with complete equations, literature review, and references.)
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<!-- ================================================================= -->
+<!-- MODAL: REPORT VIEWER (MODULE 8) -->
+<!-- ================================================================= -->
+<div id="report-modal" class="modal-overlay">
+  <div class="modal-dialog">
+    <div class="modal-header">
+      <h3 id="report-modal-title" style="font-size: 1.15rem; font-weight: 700;">Model Evaluation Report</h3>
+      <button class="modal-close-btn" style="background: transparent; border: none; font-size: 1.25rem; cursor: pointer; color: var(--text-muted);">✖</button>
+    </div>
+    <div id="report-modal-body" class="modal-body"></div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary btn-sm modal-close-btn">Close</button>
+      <button id="report-modal-download-btn" class="btn btn-primary btn-sm">📥 Download Report (.TXT)</button>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================= -->
+<!-- APPLICATION SCRIPTS -->
+<!-- ================================================================= -->
+<script src="/static/js/main.js"></script>
+<script src="/static/js/lessons.js"></script>
+<script src="/static/js/demos.js"></script>
+<script src="/static/js/iris_module.js"></script>
+<script src="/static/js/housing_module.js"></script>
+<script src="/static/js/visual_guide.js"></script>
+<script src="/static/js/quiz.js"></script>
+<script src="/static/js/progress.js"></script>
+
+</body>
+</html>
+
